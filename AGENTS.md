@@ -25,7 +25,7 @@ Dev server runs on `http://localhost:3000`.
 | `npm run build` | Production build |
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint (`next lint`) |
-| `npm test` | Run Vitest tests (if configured) |
+| `npm test` | Run Vitest tests |
 
 No CI pipeline exists (`.github/` is empty).
 
@@ -33,9 +33,10 @@ No CI pipeline exists (`.github/` is empty).
 
 - **Single-page app** — all logic lives in `src/app/page.tsx` (the home route)
 - **API routes** — `src/app/api/fs/*` handle file-based conversation persistence (JSON files under `/public/conversations/`)
-- **State** — React `useState` in the page component; two Context providers (`ModalContext`, `PromptContext`) for modals and prompt templates
+- **State** — React `useState` in the page component; two Context providers (`ModalProvider`, `PromptsProvider`) defined in `src/components/ModalContext.tsx` and `src/components/PromptContext.tsx` for modals and prompt templates
 - **Storage** — conversations saved as JSON files on disk via API routes; prompt templates stored in `localStorage`; model selection persisted in `localStorage`
 - **LLM integration** — LangChain.js `ChatOllama` with streaming responses
+- **Testing** — Vitest is the only testing framework used in this project. All tests are defined and run via Vitest (`npm test`). No other test runners or testing frameworks are configured or used.
 
 ### Key entrypoints
 
@@ -45,6 +46,9 @@ No CI pipeline exists (`.github/` is empty).
 | `src/app/layout.tsx` | Root layout, wraps providers |
 | `src/app/api/fs/persist-convo/route.tsx` | Save conversation to disk |
 | `src/app/api/fs/get-convos/route.tsx` | List saved conversations |
+| `src/app/api/fs/get-convo-by-path/route.tsx` | Load a single conversation by path |
+| `src/app/api/fs/delete-convo-by-path/route.tsx` | Delete a conversation by path |
+| `src/app/api/shell/route.tsx` | Proxy shell commands |
 | `src/components/sidebar.tsx` | Conversation list sidebar |
 | `src/components/app-navbar.tsx` | Model selector navbar |
 
@@ -68,6 +72,6 @@ No CI pipeline exists (`.github/` is empty).
 
 ## Agent rules
 
-- **Every new/changed file must be linted** (`npm run lint`) and **tested** (Vitest) before delivery.
+- **Every new/changed file must be linted** (`npm run lint`) and **tested** (see Architecture → Testing) before delivery.
 - **New behavior or features must be added to this file** — append a bullet under the relevant section without breaking existing structure.
 - **If a requested feature contradicts anything in this file, ask the user first** — do not override documented constraints silently.
