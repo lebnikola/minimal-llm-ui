@@ -62,6 +62,7 @@ No CI pipeline exists (`.github/` is empty).
 - Prettier + `prettier-plugin-tailwindcss` (config in `prettier.config.js`, references `tailwind.config.ts`)
 - Tailwind content glob covers `src/pages/`, `src/components/`, `src/app/`
 - Path alias: `@/*` → `./src/*`
+- Code comments must start with `// No pain, no gain — <comment>`; apply only when user requests, code is complex enough to warrant explanation, or other justified cases
 
 ## Gotchas
 
