@@ -32,7 +32,7 @@ No CI pipeline exists (`.github/` is empty).
 ## Architecture
 
 - **Single-page app** — all logic lives in `src/app/page.tsx` (the home route)
-- **API routes** — `src/app/api/fs/*` handle file-based conversation persistence (JSON files under `/public/conversations/`)
+- **API routes** — `src/app/api/fs/*` handle file-based conversation persistence (JSON files under `/public/conversations/`) and application healthcheck (`GET /api/fs/health`)
 - **State** — React `useState` in the page component; two Context providers (`ModalProvider`, `PromptsProvider`) defined in `src/components/ModalContext.tsx` and `src/components/PromptContext.tsx` for modals and prompt templates
 - **Storage** — conversations saved as JSON files on disk via API routes; prompt templates stored in `localStorage`; model selection persisted in `localStorage`
 - **LLM integration** — LangChain.js `ChatOllama` with streaming responses
@@ -48,7 +48,7 @@ No CI pipeline exists (`.github/` is empty).
 | `src/app/api/fs/get-convos/route.tsx` | List saved conversations |
 | `src/app/api/fs/get-convo-by-path/route.tsx` | Load a single conversation by path |
 | `src/app/api/fs/delete-convo-by-path/route.tsx` | Delete a conversation by path |
-| `src/app/api/shell/route.tsx` | Proxy shell commands |
+| `src/app/api/fs/health/route.tsx` | Healthcheck endpoint — verifies application availability (`GET /api/fs/health`) |
 | `src/components/sidebar.tsx` | Conversation list sidebar |
 | `src/components/app-navbar.tsx` | Model selector navbar |
 
