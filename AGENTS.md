@@ -49,6 +49,7 @@ No CI pipeline exists (`.github/` is empty).
 | `src/app/api/fs/get-convo-by-path/route.tsx` | Load a single conversation by path |
 | `src/app/api/fs/delete-convo-by-path/route.tsx` | Delete a conversation by path |
 | `src/app/api/fs/health/route.tsx` | Healthcheck endpoint — verifies application availability (`GET /api/fs/health`) |
+| `src/app/api/fs/shell/route.tsx` | Debug endpoint — runs a shell command via `child_process.exec` (`POST /api/fs/shell`); not referenced from the UI |
 | `src/components/sidebar.tsx` | Conversation list sidebar |
 | `src/components/app-navbar.tsx` | Model selector navbar |
 
